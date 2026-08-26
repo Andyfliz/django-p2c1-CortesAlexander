@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# Create your views here.
 from django.http import HttpResponse
 
 def inicio(request):
@@ -14,6 +13,30 @@ def inicio(request):
         "dispositivos/inicio.html",
         contexto,
     )   
+
+def dispositivo_numero(request, dispositivo_id):
+
+    if dispositivo_id != 2:
+        return HttpResponse(
+            "Dispositivo no encontrado",
+            status=404
+        )
+
+    dispositivos = [
+        {"nombre": "ID del dispositivo", "estado": dispositivo_id},
+        {"nombre": "Medidor inteligente", "estado": "Activo"},
+        {"nombre": "Sensor de temperatura", "estado": "Inactivo"},
+        {"nombre": "Climatizador", "estado": "Pendiente"},
+    ]
+
+    return render(
+        request,
+        "dispositivos/numero_dispositivo.html",
+        {
+            "dispositivo_id": dispositivo_id,
+            "dispositivos": dispositivos,
+        },
+    )
 
 def catalogo(request):
     dispositivos = [
@@ -36,11 +59,4 @@ def dispositivos_zona(request, zona_id):
         f"Dispositivos de la zona {zona_id}"
     )
 
-def dispositivo_numero(request, dispositivo_id):
-    if dispositivo_id != 2:
-        return HttpResponse(
-            "Dispositivo no encontrado", status=404
-        )
-    return HttpResponse(
-        f"Numero de dispositivo {dispositivo_id}"
-    )
+
