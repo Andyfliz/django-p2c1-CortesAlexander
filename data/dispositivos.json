@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "nombre": "Medidor inteligente",
+        "estado": "Activo",
+        "consumo_kwh": 18.4
+    },
+    {
+        "id": 2,
+        "nombre": "Climatizador",
+        "estado": "Revisión",
+        "consumo_kwh": 32.7
+    },
+    {
+        "id": 3,
+        "nombre": "Inversor Solar 5kW",
+        "estado": "Activo",
+        "consumo_kwh": 45.2
+    },
+    {
+        "id": 4,
+        "nombre": "Bomba de Calor Eco",
+        "estado": "Activo",
+        "consumo_kwh": 28.9
+    },
+    {
+        "id": 5,
+        "nombre": "Cargador Vehículo Eléctrico",
+        "estado": "Inactivo",
+        "consumo_kwh": 0.0
+    },
+    {
+        "id": 6,
+        "nombre": "Panel Fotovoltaico Roof-1",
+        "estado": "Activo",
+        "consumo_kwh": 12.1
+    },
+    {
+        "id": 7,
+        "nombre": "Batería de Respaldos 10kWh",
+        "estado": "Revisión",
+        "consumo_kwh": 8.5
+    },
+    {
+        "id": 8,
+        "nombre": "Sensor de Iluminación LED",
+        "estado": "Activo",
+        "consumo_kwh": 3.4
+    }
+]
