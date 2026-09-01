@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .services import cargar_dispositivos
+from .services import cargar_dispositivos, cargar_zonas, cargar_categorias
 
 def inicio(request):
 
@@ -39,8 +39,25 @@ def dispositivo_numero(request, dispositivo_id):
         },
     )
 
+
+def dispositivos_zona(request, zona_id):
+    if zona_id != 3:
+        return HttpResponse(
+            "Zona no encontrada", status=404
+        )
+    return HttpResponse(
+        f"Dispositivos de la zona {zona_id}"
+    )
+
+
 def catalogo(request):
     dispositivos = cargar_dispositivos()
+    zonas = cargar_zonas()
+    categorias = cargar_categorias()
+
+    # Crea un diccionario {id: nombre} para buscar rápidamente zonas (Ej: {1: "Sala de Estar"})
+    mapa_zonas = {z["id"]: z["nombre"] for z in zonas}
+
     activos = sum(
         1 for item in dispositivos
         if item["estado"] == "Activo"
@@ -53,15 +70,3 @@ def catalogo(request):
     return render(
         request, "dispositivos/catalogo.html", contexto
     )
-
-
-def dispositivos_zona(request, zona_id):
-    if zona_id != 3:
-        return HttpResponse(
-            "Zona no encontrada", status=404
-        )
-    return HttpResponse(
-        f"Dispositivos de la zona {zona_id}"
-    )
-
-
