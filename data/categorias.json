@@ -1,7 +1,17 @@
 [
-    {
-        "id": 1,
-        "estado": "Activo",
-        "consumo_kwh": 18.4
-    }
+  {
+    "id": 1,
+    "nombre": "Climatización",
+    "descripcion": "Equipos de aire acondicionado y calefacción"
+  },
+  {
+    "id": 2,
+    "nombre": "Iluminación",
+    "descripcion": "Sistemas de iluminación LED e inteligente"
+  },
+  {
+    "id": 3,
+    "nombre": "Medición",
+    "descripcion": "Sensores y medidores de consumo eléctrico"
+  }
 ]

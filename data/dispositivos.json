@@ -1,18 +1,66 @@
 [
   {
     "id": 1,
+    "nombre": "Aire Acondicionado Central",
     "estado": "Activo",
-    "nombre": "Aire Acondicionado",
-    "consumo_kwh": 2.5,
+    "consumo_kwh": 45.2,
     "zona_id": 1,
     "categoria_id": 1
   },
   {
-    "id": 12,
+    "id": 2,
+    "nombre": "Panel LED Principal",
+    "estado": "Activo",
+    "consumo_kwh": 8.5,
+    "zona_id": 1,
+    "categoria_id": 2
+  },
+  {
+    "id": 3,
+    "nombre": "Medidor Trifásico",
+    "estado": "Revisión",
+    "consumo_kwh": 12.0,
+    "zona_id": 1,
+    "categoria_id": 3
+  },
+  {
+    "id": 4,
+    "nombre": "Climatizador Industrial",
+    "estado": "Activo",
+    "consumo_kwh": 120.0,
+    "zona_id": 2,
+    "categoria_id": 1
+  },
+  {
+    "id": 5,
+    "nombre": "Reflectores Exteriores",
     "estado": "Inactivo",
-    "nombre": "Refrigerador",
-    "consumo_kwh": 1.2,
+    "consumo_kwh": 25.0,
     "zona_id": 2,
     "categoria_id": 2
+  },
+  {
+    "id": 6,
+    "nombre": "Sensor de Voltaje",
+    "estado": "Activo",
+    "consumo_kwh": 3.1,
+    "zona_id": 2,
+    "categoria_id": 3
+  },
+  {
+    "id": 7,
+    "nombre": "Sensor de Temperatura",
+    "estado": "Activo",
+    "consumo_kwh": 1.5,
+    "zona_id": 3,
+    "categoria_id": 3
+  },
+  {
+    "id": 8,
+    "nombre": "Aire Acondicionado Precisión",
+    "estado": "Revisión",
+    "consumo_kwh": 38.4,
+    "zona_id": 3,
+    "categoria_id": 1
   }
 ]

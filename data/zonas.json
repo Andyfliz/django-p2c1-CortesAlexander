@@ -1,7 +1,17 @@
 [
-    {
-        "id": 1,
-        "nombre": "Medidor inteligente",
-        "limite_kwh": "Activo"
-    }
+  {
+    "id": 1,
+    "nombre": "Oficina Central",
+    "limite_kwh": 150.0
+  },
+  {
+    "id": 2,
+    "nombre": "Planta de Producción",
+    "limite_kwh": 500.0
+  },
+  {
+    "id": 3,
+    "nombre": "Laboratorio Principal",
+    "limite_kwh": 250.0
+  }
 ]

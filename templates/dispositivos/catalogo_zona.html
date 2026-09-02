@@ -1,1 +1,29 @@
 {% extends "base.html" %}
+
+{% block content %}
+
+<h2>Catálogo de Zonas y Dispositivos</h2>
+
+<ul>
+    {% for zona in zonas %}
+        <li>
+            <!-- Información de la Zona -->
+            <strong>{{ zona.nombre }}</strong> — Límite: {{ zona.limite_kwh }} kWh
+            
+            <!-- Lista anidada de dispositivos pertenecientes a esta zona -->
+            <ul>
+                {% for dispositivo in zona.dispositivos %}
+                    <li>
+                        {{ dispositivo.nombre }} — Consumo: {{ dispositivo.consumo_kwh }} kWh (Estado: {{ dispositivo.estado }})
+                    </li>
+                {% empty %}
+                    <li style="color: gray;"><em>No hay dispositivos registrados en esta zona.</em></li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% empty %}
+        <li>No existen zonas disponibles.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

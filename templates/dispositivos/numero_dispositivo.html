@@ -8,10 +8,10 @@ Dispositivo | EcoEnergy
 <h1>Dispositivo número {{ dispositivo_id }}</h1>
 
 <ul>
-    {% for dispositivo in dispositivos %}
-        <li>{{ dispositivo.nombre }} — {{ dispositivo.estado }}</li>
+    {% for zona in zonas %}
+        <li>{{ zonas.nombre }} — {{ zonas.limite_kwh }}</li>
     {% empty %}
-        <li>No existen dispositivos disponibles.</li>
+        <li>No existen zonas disponibles.</li>
     {% endfor %}
 </ul>
 
