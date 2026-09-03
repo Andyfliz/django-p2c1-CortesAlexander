@@ -1,26 +1,31 @@
 import json
 from django.conf import settings
 
-def cargar_dispositivos():
-    ruta = settings.BASE_DIR / "data" / "dispositivos.json"
+import json
+from django.conf import settings
+
+def cargar_json(nombre_archivo):
+    ruta = settings.BASE_DIR / "data" / nombre_archivo
+    
+    if not ruta.exists():
+        return []
+
     with ruta.open(encoding="utf-8") as archivo:
-        datos = json.load(archivo)
-    if not isinstance(datos, list):
-        raise ValueError("Se esperaba una lista de dispositivos")
-    return datos
+        contenido = archivo.read().strip()
+        if not contenido:
+            return []
+        
+        try:
+            datos = json.loads(contenido)
+            return datos if isinstance(datos, list) else []
+        except json.JSONDecodeError:
+            return []
+
+def cargar_dispositivos():
+    return cargar_json("dispositivos.json")
 
 def cargar_zonas():
-    ruta = settings.BASE_DIR / "data" / "zonas.json"
-    with ruta.open(encoding="utf-8") as archivo:
-        datos = json.load(archivo)
-    if not isinstance(datos, list):
-        raise ValueError("Se esperaba una lista zonas")
-    return datos
+    return cargar_json("zonas.json")
 
 def cargar_categorias():
-    ruta = settings.BASE_DIR / "data" / "categorias.json"
-    with ruta.open(encoding="utf-8") as archivo:
-        datos = json.load(archivo)
-    if not isinstance(datos, list):
-        raise ValueError("Se esperaba una lista zonas")
-    return datos
+    return cargar_json("categorias.json")

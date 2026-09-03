@@ -15,29 +15,102 @@ def inicio(request):
         contexto,
     )   
 
-def dispositivo_numero(request, dispositivo_id):
+def zonas(request):
 
-    if dispositivo_id != 2:
-        return HttpResponse(
-            "Dispositivo no encontrado",
-            status=404
-        )
+    zonas = cargar_zonas()
+    dispositivos = cargar_dispositivos()
 
-    dispositivos = [
-        {"nombre": "ID del dispositivo", "estado": dispositivo_id},
-        {"nombre": "Medidor inteligente", "estado": "Activo"},
-        {"nombre": "Sensor de temperatura", "estado": "Inactivo"},
-        {"nombre": "Climatizador", "estado": "Pendiente"},
-    ]
+    for zona in zonas:
+        dispositivos_de_zona = []
+        total_dispositivos = 0
 
-    return render(
-        request,
-        "dispositivos/numero_dispositivo.html",
-        {
-            "dispositivo_id": dispositivo_id,
-            "dispositivos": dispositivos,
-        },
-    )
+        for dispositivo in dispositivos:
+            if dispositivo.get("zona_id") == zona["id"]:
+                dispositivos_de_zona.append(dispositivo)
+                total_dispositivos += 1
+        zona["dispositivos"] = dispositivos_de_zona
+        zona["total_dispositivos"] = total_dispositivos
+    
+    contexto = {
+        "zonas": zonas,
+        "total": len(zonas)
+    }
+
+    return render(request, "dispositivos/zona.html", contexto)
+
+def zonas(request):
+    zonas = cargar_zonas()
+    dispositivos = cargar_dispositivos()
+
+    for zona in zonas:
+        dispositivos_de_zona = []
+        total_dispositivos = 0
+
+        for dispositivo in dispositivos:
+            if dispositivo.get("zona_id") == zona["id"]:
+                dispositivos_de_zona.append(dispositivo)
+                total_dispositivos += 1
+        zona["dispositivos"] = dispositivos_de_zona
+        zona["total_dispositivos"] = total_dispositivos
+    
+    contexto = {
+        "zonas": zonas,
+        "total": len(zonas)
+    }
+
+    return render(request, "dispositivos/zona.html", contexto)
+
+def zona_id(request, zona_id):
+    zonas = cargar_zonas()
+    dispositivos = cargar_dispositivos()
+    categorias = cargar_categorias()
+
+    zona_encontrada = None
+
+    for zona in zonas:
+        if zona["id"] == zona_id:
+            zona_encontrada = zona
+
+    if zona_encontrada is None:
+        return HttpResponse("Zona no encontrada", status=404)
+
+    categorias_zona = []
+    consumo_total = 0
+
+    for categoria in categorias:
+        dispositivos_categoria = []
+
+        for dispositivo in dispositivos:
+
+            if dispositivo["zona_id"] == zona_id:
+                if dispositivo["categoria_id"] == categoria["id"]:
+                    dispositivos_categoria.append(dispositivo)
+                    consumo_total = consumo_total + dispositivo["consumo_kwh"]
+
+        if len(dispositivos_categoria) > 0:
+            categoria["dispositivos"] = dispositivos_categoria
+            categorias_zona.append(categoria)
+
+    total_dispositivos = 0
+
+    for categoria in categorias_zona:
+        total_dispositivos = total_dispositivos + len(categoria["dispositivos"])
+
+    if consumo_total > zona_encontrada["limite_kwh"]:
+        estado = "ALERTA"
+    else:
+        estado = "NORMAL"
+
+    zona_encontrada["categorias"] = categorias_zona
+    zona_encontrada["total_dispositivos"] = total_dispositivos
+    zona_encontrada["consumo_total"] = consumo_total
+    zona_encontrada["estado"] = estado
+
+    contexto = {
+        "zona": zona_encontrada
+    }
+
+    return render(request, f"dispositivos/zona_{zona_id}.html", contexto)
 
 def catalogo(request):
     dispositivos = cargar_dispositivos()
@@ -56,22 +129,3 @@ def catalogo(request):
     return render(
     request, "dispositivos/catalogo.html", contexto
 )
-
-def catalogo_zonas(request):
-    zonas = cargar_zonas()
-    dispositivos = cargar_dispositivos()
-
-    for zona in zonas:
-        dispositivos_de_zona = []
-
-        for dispositivo in dispositivos:
-            if dispositivo.get("zona_id") == zona["id"]:
-                dispositivos_de_zona.append(dispositivo)
-
-        zona["dispositivos"] = dispositivos_de_zona
-
-    contexto = {
-        "zonas": zonas
-    }
-
-    return render(request, "dispositivos/catalogo_zona.html", contexto)

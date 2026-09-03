@@ -10,3 +10,36 @@
 <p>No existen dispositivos disponibles.</p>
 {% endfor %}
 {% endblock %}
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Catálogo de Zonas y Dispositivos</h2>
+<h2>{{ total }}</h2>
+
+<ul>
+    {% for zona in zonas %}
+        <li>
+            <strong>{{ zona.nombre }}</strong> — Límite: {{ zona.limite_kwh }} kWh
+            
+            <ul>
+                {% for dispositivo in zona.dispositivos %}
+                    <li>
+                        {{ dispositivo.nombre }} — Consumo: {{ dispositivo.consumo_kwh }} kWh (Estado: {{ dispositivo.estado }})
+                        
+                        {% for categoria in dispositivo.categorias %}
+                            <small>| Categoría: {{ categoria.nombre }}</small>
+                        {% endfor %}
+                    </li>
+                {% empty %}
+                    <li>Sin dispositivos en esta zona.</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% empty %}
+        <li>No existen zonas disponibles.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

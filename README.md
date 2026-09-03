@@ -1,46 +1,161 @@
 # EcoEnergy - Proyecto Integrado (Back-End)
 
 ## Descripción y Objetivo
-Este proyecto constituye el núcleo del desarrollo Back-End para la plataforma **EcoEnergy**, construido en Python utilizando el framework web Django. Su objetivo es proporcionar una arquitectura de software robusta, escalable y mantenible para gestionar los recursos y servicios energéticos del proyecto.
+
+Este proyecto constituye el desarrollo Back-End de la plataforma **EcoEnergy**, construido en **Python** utilizando el framework web **Django**.
+
+Su objetivo es proporcionar una arquitectura de software organizada, mantenible y escalable para gestionar los recursos y servicios energéticos del proyecto, utilizando el patrón **MVT (Model-View-Template)** y la separación de responsabilidades.
 
 ---
 
 ## Requisitos Previos
 
-* **Python:** Versión `3.14.7` instalada en el sistema.
-* **Git:** Para el control de versiones y clonación del repositorio.
-* **Terminal Bash:** (Ejemplo: Git Bash en Windows / Zsh / Bash en Unix).
+Antes de ejecutar el proyecto, se requiere tener instalado:
+
+* **Python:** versión `3.14.7`
+* **Git:** para clonar el repositorio y gestionar el control de versiones.
+* **Terminal Bash:** por ejemplo, Git Bash en Windows, Bash o Zsh en sistemas Unix.
 
 ---
 
-## Clonación del Repositorio
+## Instalación y Configuración
 
-Para clonar el repositorio localmente, ejecuta el siguiente comando en tu terminal:
+### 1. Clonar el repositorio
+
+Desde una terminal Bash, clonar el repositorio y acceder a la carpeta del proyecto:
 
 ```bash
 git clone <URL_DEL_REPOSITORIO>
 cd django-p2c1-CortesAlexander
+```
 
-## Documentación de Templates, Views y Navegación
+### 2. Crear el entorno virtual
 
-### Estructura de Plantillas
-* **Plantilla base:** `templates/base.html`
-* **Plantillas de la aplicación:**
-  * `templates/dispositivos/inicio.html`
-  * `templates/dispositivos/catalogo.html`
-  * `templates/dispositivos/numero_dispositivo.html`
+Crear un entorno virtual para mantener aisladas las dependencias del proyecto:
 
-### Rutas Funcionales y Datos de Contexto (Views)
+```bash
+python -m venv .venv
+```
 
-| Ruta (URL) | Vista (`View`) | Claves de Contexto | Descripción / Datos Preparados |
-| :--- | :--- | :--- | :--- |
-| `/` | `inicio` | `sistema`, `mensaje`, `asignatura` | Retorna la vista principal con información de la asignatura y el sistema EcoEnergy. |
-| `/dispositivos/` | `catalogo` | `dispositivos` | Prepara una lista de diccionarios con dispositivos ("Medidor inteligente", "Sensor de temperatura", "Climatizador") y sus estados. |
-| `/dispositivos/<int:dispositivo_id>/` | `dispositivo_numero` | `dispositivo_id`, `dispositivos` | Valida que la ID sea 2 (de lo contrario retorna 404). Si es correcta, genera y entrega una lista detallada de dispositivos. |
-| `/zonas/<int:zona_id>/dispositivos/` | `dispositivos_zona` | *N/A (Respuesta Directa)* | Valida que la ID de zona sea 3 (de lo contrario retorna 404). Devuelve un `HttpResponse` plano con el texto de la zona. |
+### 3. Activar el entorno virtual
 
-### Ejecución y Prueba de Navegación
+En Git Bash:
 
-1. **Iniciar el servidor local:**
-   ```bash
-   python manage.py runserver
+```bash
+source .venv/Scripts/activate
+```
+
+Una vez activado, la terminal debería mostrar `(.venv)` al inicio de la línea.
+
+### 4. Instalar las dependencias
+
+Actualizar `pip` e instalar las dependencias indicadas en `requirements.txt`:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### 5. Verificar las dependencias
+
+Comprobar que no existan conflictos entre los paquetes instalados:
+
+```bash
+python -m pip check
+```
+
+### 6. Validar la configuración de Django
+
+Ejecutar la comprobación de Django para verificar que el proyecto esté correctamente configurado:
+
+```bash
+python manage.py check
+```
+
+### 7. Iniciar el servidor
+
+Para ejecutar el proyecto localmente:
+
+```bash
+python manage.py runserver
+```
+
+Luego, acceder desde el navegador a la dirección indicada por Django.
+
+---
+
+## Control de Versiones con Git
+
+Una vez realizados cambios en el proyecto, se deben guardar y registrar utilizando Git.
+
+### 1. Guardar los cambios
+
+Guardar los archivos modificados desde el editor utilizando:
+
+```text
+Ctrl + S
+```
+
+Esto guarda los cambios en el computador, pero todavía no los registra en el historial de Git.
+
+### 2. Revisar el estado del repositorio
+
+Antes de registrar los cambios, es recomendable verificar qué archivos fueron modificados:
+
+```bash
+git status
+```
+
+### 3. Preparar los cambios
+
+Para agregar el archivo `README.md`:
+
+```bash
+git add README.md
+```
+
+También se pueden agregar todos los archivos modificados:
+
+```bash
+git add .
+```
+
+### 4. Crear el commit
+
+Registrar los cambios en el historial de Git:
+
+```bash
+git commit -m "docs: actualizar README con pasos de instalación y documentación MVT"
+```
+
+El `commit` funciona como un punto de control del proyecto y permite identificar exactamente qué cambios fueron registrados.
+
+### 5. Subir los cambios a GitHub
+
+Enviar los commits al repositorio remoto:
+
+```bash
+git push origin main
+```
+
+De esta manera, los cambios realizados localmente quedan disponibles en el repositorio remoto.
+
+---
+
+## Estado del Proyecto
+
+Actualmente, el proyecto cuenta con la configuración inicial del entorno de desarrollo y la estructura Back-End basada en Django.
+
+Se continúa trabajando en la implementación de las funcionalidades correspondientes al proyecto **EcoEnergy**, incluyendo la gestión y visualización de zonas y dispositivos energéticos.
+
+---
+
+## Tecnologías Utilizadas
+
+* Python
+* Django
+* Git
+* GitHub
+* HTML
+* Bootstrap
+* Archivos JSON como fuente de datos
