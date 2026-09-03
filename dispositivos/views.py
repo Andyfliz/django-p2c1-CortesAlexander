@@ -129,3 +129,42 @@ def catalogo(request):
     return render(
     request, "dispositivos/catalogo.html", contexto
 )
+
+
+def resumen_datos(request):
+    zonas = cargar_zonas()
+    dispositivos = cargar_dispositivos()
+
+    zonas_totales = len(zonas)
+    dispositivos_totales = len(dispositivos)
+
+    for zona in zonas:
+        dispositivos_de_zona = []
+        consumo_total = 0
+
+        for dispositivo in dispositivos:
+            if dispositivo.get("zona_id") == zona["id"]:
+                dispositivos_de_zona.append(dispositivo)
+                consumo_total += dispositivo.get("consumo_kwh", 0)
+
+        if consumo_total > zona.get("limite_kwh", 0):
+            estado = "ALERTA"
+        else:
+            estado = "Normal"
+
+        zona["dispositivos"] = dispositivos_de_zona
+        zona["total_dispositivos"] = len(dispositivos_de_zona)
+        zona["consumo_total"] = consumo_total
+        zona["estado"] = estado
+
+    contexto = {
+        "zonas": zonas,  
+        "zonas_totales": zonas_totales,
+        "dispositivos_totales": dispositivos_totales,
+    }
+
+    return render(request, "dispositivos/resumen_zonas.html", contexto)
+    
+
+
+        

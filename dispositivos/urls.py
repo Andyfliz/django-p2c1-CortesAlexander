@@ -11,4 +11,6 @@ urlpatterns = [
     path("zonas/", views.zonas, name="zonas"),
     
     path("zonas/<int:zona_id>/", views.zona_id, name="zona_id"),
+
+    path("resumen_zonas/", views.resumen_datos, name="resumen _zonas",)
 ]
